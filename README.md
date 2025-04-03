@@ -30,8 +30,7 @@ The **Guardian – Emergency Contact & Medical Info App** is designed to help us
 
 ### **1️⃣ Clone the Repository**
 ```sh
-git clone https://github.com/your-team/guardian-app.git
-cd guardian-app
+git clone https://github.com/entuelias/Guardian-App.git
 ```
 
 ### **2️⃣ Install Dependencies**
