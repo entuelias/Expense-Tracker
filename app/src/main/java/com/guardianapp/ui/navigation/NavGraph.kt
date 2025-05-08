@@ -7,22 +7,25 @@ import androidx.navigation.compose.composable
 import com.guardianapp.ui.splash.SplashScreen
 import com.guardianapp.ui.login.LoginScreen
 import com.guardianapp.ui.home.HomeScreen
+import com.guardianapp.ui.profile.ProfileScreen
 
 @Composable
 fun AppNavigation(navController: NavHostController) {
     NavHost(
         navController = navController,
-        startDestination = Screen.Splash.route
+        startDestination = "splash"
     ) {
-        composable(Screen.Splash.route) {
+        composable("splash") {
             SplashScreen(navController = navController)
         }
-        composable(Screen.Login.route) {
+        composable("login") {
             LoginScreen(navController = navController)
         }
-        composable(Screen.Home.route) {
+        composable("home") {
             HomeScreen(navController = navController)
         }
-        // Other screens will be added later
+        composable(Screen.Profile.route) {
+            ProfileScreen(navController = navController)
+        }
     }
 }
