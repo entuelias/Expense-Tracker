@@ -1,5 +1,6 @@
 package com.guardianapp.navigation
 
+import com.guardianapp.ui.signup.SignUpScreen
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -38,6 +39,10 @@ fun AppNavigation(navController: NavHostController) {
         composable(Screen.MedicalInfo.route) {
             MedicalInfoScreen(navController = navController)
         }
+        composable("signup") {           // Changed to match string route
+            SignUpScreen(navController = navController)
+        }
+
     }
 
 }

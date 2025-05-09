@@ -25,6 +25,14 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 @Composable
 fun SplashScreen(navController: NavController) {
     val systemUiController = rememberSystemUiController()
+    var currentDot by remember { mutableStateOf(0) }
+
+    LaunchedEffect(Unit) {
+        while(true) {
+            delay(300)
+            currentDot = (currentDot + 1) % 3
+        }
+    }
 
     SideEffect {
         systemUiController.setStatusBarColor(
@@ -33,7 +41,7 @@ fun SplashScreen(navController: NavController) {
         )
     }
 
-    LaunchedEffect(key1 = true) {
+    LaunchedEffect(Unit) {
         delay(2000)
         navController.navigate("login") {
             popUpTo("splash") { inclusive = true }
@@ -74,7 +82,7 @@ fun SplashScreen(navController: NavController) {
                 painter = painterResource(id = R.drawable.ic_heart),
                 contentDescription = "Heart Icon",
                 modifier = Modifier.size(24.dp),
-                colorFilter = ColorFilter.tint(Color(0xFFE53935))  // Bright red color
+                colorFilter = ColorFilter.tint(Color(0xFFE53935))
             )
 
             Spacer(modifier = Modifier.width(8.dp))
@@ -92,31 +100,40 @@ fun SplashScreen(navController: NavController) {
                 painter = painterResource(id = R.drawable.ic_medical_file),
                 contentDescription = "Medical File Icon",
                 modifier = Modifier.size(24.dp),
-                colorFilter = ColorFilter.tint(Color(0xFF4CAF50))  // Medical green color
+                colorFilter = ColorFilter.tint(Color(0xFF4CAF50))
             )
         }
 
         Spacer(modifier = Modifier.height(32.dp))
 
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(4.dp),
-            modifier = Modifier.padding(vertical = 8.dp)
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.padding(vertical = 16.dp)
         ) {
-            repeat(3) {
-                Box(
-                    modifier = Modifier
-                        .size(8.dp)
-                        .background(White, CircleShape)
-                )
+            Text(
+                text = "Loading",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = White,
+                modifier = Modifier.padding(bottom = 16.dp)
+            )
+
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                repeat(3) { index ->
+                    Box(
+                        modifier = Modifier
+                            .size(14.dp)
+                            .background(
+                                color = if (index == currentDot) White else White.copy(alpha = 0.3f),
+                                shape = CircleShape
+                            )
+                    )
+                }
             }
         }
-
-        Text(
-            text = "Loading...",
-            fontSize = 16.sp,
-            color = White,
-            modifier = Modifier.padding(top = 8.dp)
-        )
 
         Spacer(modifier = Modifier.height(24.dp))
 
