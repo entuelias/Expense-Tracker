@@ -9,6 +9,8 @@ import com.guardianapp.ui.splash.SplashScreen
 import com.guardianapp.ui.login.LoginScreen
 import com.guardianapp.ui.home.HomeScreen
 import com.guardianapp.ui.profile.ProfileScreen
+  // Add this import
+import com.guardianapp.navigation.Screen      // Add this import
 
 @Composable
 fun AppNavigation(navController: NavHostController) {
@@ -22,10 +24,11 @@ fun AppNavigation(navController: NavHostController) {
         composable("login") {
             LoginScreen(navController = navController)
         }
+
         composable("home") {
             HomeScreen(navController = navController)
         }
-        composable(Screen.Profile.route) {
+        composable("profile") {          // Changed to match string route
             ProfileScreen(navController = navController)
         }
         composable(Screen.EmergencyContact.route) {
