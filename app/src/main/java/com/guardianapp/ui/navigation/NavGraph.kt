@@ -9,13 +9,9 @@ import com.guardianapp.ui.splash.SplashScreen
 import com.guardianapp.ui.login.LoginScreen
 import com.guardianapp.ui.home.HomeScreen
 import com.guardianapp.ui.profile.ProfileScreen
-<<<<<<< Updated upstream
-  // Add this import
-import com.guardianapp.navigation.Screen      // Add this import
 
-=======
 import com.guardianapp.ui.medicalinfo.MedicalInfoScreen
->>>>>>> Stashed changes
+//>>>>>>> Stashed changes
 @Composable
 fun AppNavigation(navController: NavHostController) {
     NavHost(
@@ -35,15 +31,15 @@ fun AppNavigation(navController: NavHostController) {
         composable("profile") {          // Changed to match string route
             ProfileScreen(navController = navController)
         }
-<<<<<<< Updated upstream
+
         composable(Screen.EmergencyContact.route) {
             EmergencyContactScreen(navController = navController)
         }
-    }
-}
-=======
         composable(Screen.MedicalInfo.route) {
             MedicalInfoScreen(navController = navController)
         }
-}}
->>>>>>> Stashed changes
+    }
+
+}
+
+
