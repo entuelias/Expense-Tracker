@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.guardianapp.ui.emergencycontacts.EmergencyContactScreen
 import com.guardianapp.ui.splash.SplashScreen
 import com.guardianapp.ui.login.LoginScreen
 import com.guardianapp.ui.home.HomeScreen
@@ -26,6 +27,9 @@ fun AppNavigation(navController: NavHostController) {
         }
         composable(Screen.Profile.route) {
             ProfileScreen(navController = navController)
+        }
+        composable(Screen.EmergencyContact.route) {
+            EmergencyContactScreen(navController = navController)
         }
     }
 }
