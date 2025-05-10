@@ -258,20 +258,3 @@ fun ProfileScreen(navController: NavController) {
         )
     }
 }
-
-@Composable
-private fun InfoItem(label: String, value: String) {
-    Column {
-        Text(
-            text = label,
-            fontSize = 16.sp,
-            color = Color.Black
-        )
-        Text(
-            text = value,
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color.Black
-        )
-    }
-}

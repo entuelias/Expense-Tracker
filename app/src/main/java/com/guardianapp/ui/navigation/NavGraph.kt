@@ -10,6 +10,7 @@ import com.guardianapp.ui.splash.SplashScreen
 import com.guardianapp.ui.login.LoginScreen
 import com.guardianapp.ui.home.HomeScreen
 import com.guardianapp.ui.profile.ProfileScreen
+import com.guardianapp.ui.signup.SignUpScreen
 
 import com.guardianapp.ui.medicalinfo.MedicalInfoScreen
 //>>>>>>> Stashed changes
@@ -36,6 +37,10 @@ fun AppNavigation(navController: NavHostController) {
         composable(Screen.EmergencyContact.route) {
             EmergencyContactScreen(navController = navController)
         }
+        composable("signup") {           // Changed to match string route
+            SignUpScreen(navController = navController)
+        }
+
         composable(Screen.MedicalInfo.route) {
             MedicalInfoScreen(navController = navController)
         }

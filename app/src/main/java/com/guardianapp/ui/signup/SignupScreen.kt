@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> a6722c7da2acb5c0d36e65a9a25104bdc4cff50a
 package com.guardianapp.ui.signup
 
 import androidx.compose.foundation.background
@@ -97,6 +101,10 @@ fun SignUpScreen(navController: NavController) {
         Spacer(modifier = Modifier.height(16.dp))
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> a6722c7da2acb5c0d36e65a9a25104bdc4cff50a
         Text("Email", color = Color.Black, modifier = Modifier.padding(bottom = 8.dp))
         OutlinedTextField(
             value = email,
@@ -182,6 +190,10 @@ fun SignUpScreen(navController: NavController) {
             }
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> a6722c7da2acb5c0d36e65a9a25104bdc4cff50a
             // Date Dropdown
             Box(modifier = Modifier.weight(1f)) {
                 ExposedDropdownMenuBox(
@@ -264,6 +276,10 @@ fun SignUpScreen(navController: NavController) {
         Spacer(modifier = Modifier.height(16.dp))
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> a6722c7da2acb5c0d36e65a9a25104bdc4cff50a
         Text("What is your blood type?", color = Color.Black)
         Box(
             modifier = Modifier
@@ -324,4 +340,8 @@ fun SignUpScreen(navController: NavController) {
             Text("Create Account", color = Color.White)
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> a6722c7da2acb5c0d36e65a9a25104bdc4cff50a
