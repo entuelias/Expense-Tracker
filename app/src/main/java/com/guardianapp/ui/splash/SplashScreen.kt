@@ -31,7 +31,7 @@ fun SplashScreen(
     viewModel: SplashViewModel = koinViewModel()
 ) {
     val systemUiController = rememberSystemUiController()
-<<<<<<< HEAD
+
     var currentDot by remember { mutableStateOf(0) }
 
     LaunchedEffect(Unit) {
@@ -40,7 +40,7 @@ fun SplashScreen(
             currentDot = (currentDot + 1) % 3
         }
     }
-=======
+
     val isLoading by viewModel.isLoading.collectAsStateWithLifecycle()
 
     // Animation states
@@ -64,7 +64,7 @@ fun SplashScreen(
         targetValue = if (isLoading) 1f else 0f,
         animationSpec = tween(1000)
     )
->>>>>>> a6722c7da2acb5c0d36e65a9a25104bdc4cff50a
+>>>>>>> 
 
     SideEffect {
         systemUiController.setStatusBarColor(
@@ -73,12 +73,12 @@ fun SplashScreen(
         )
     }
 
-<<<<<<< HEAD
+
     LaunchedEffect(Unit) {
         delay(2000)
         navController.navigate("login") {
             popUpTo("splash") { inclusive = true }
-=======
+
     LaunchedEffect(key1 = true) {
         viewModel.startSplash()
     }
@@ -90,7 +90,7 @@ fun SplashScreen(
             navController.navigate(route) {
                 popUpTo("splash") { inclusive = true }
             }
->>>>>>> a6722c7da2acb5c0d36e65a9a25104bdc4cff50a
+
         }
     }
 
@@ -158,7 +158,7 @@ fun SplashScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.padding(vertical = 16.dp)
         ) {
-<<<<<<< HEAD
+
             Text(
                 text = "Loading",
                 fontSize = 20.sp,
@@ -184,7 +184,7 @@ fun SplashScreen(
             }
         }
 
-=======
+
             repeat(3) { index ->
                 Box(
                     modifier = Modifier
@@ -210,7 +210,6 @@ fun SplashScreen(
             )
         }
 
->>>>>>> a6722c7da2acb5c0d36e65a9a25104bdc4cff50a
         Spacer(modifier = Modifier.height(24.dp))
 
         AnimatedVisibility(
@@ -228,4 +227,5 @@ fun SplashScreen(
             )
         }
     }
+}
 }
