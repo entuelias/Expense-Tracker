@@ -15,7 +15,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -24,6 +23,7 @@ import com.guardianapp.ui.theme.*
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import org.koin.androidx.compose.koinViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import kotlinx.coroutines.delay
 
 @Composable
 fun SplashScreen(
@@ -31,56 +31,18 @@ fun SplashScreen(
     viewModel: SplashViewModel = koinViewModel()
 ) {
     val systemUiController = rememberSystemUiController()
-
+    val isLoading by viewModel.isLoading.collectAsStateWithLifecycle()
     var currentDot by remember { mutableStateOf(0) }
+
+    LaunchedEffect(key1 = true) {
+        viewModel.startSplash()
+    }
 
     LaunchedEffect(Unit) {
         while(true) {
             delay(300)
             currentDot = (currentDot + 1) % 3
         }
-    }
-
-    val isLoading by viewModel.isLoading.collectAsStateWithLifecycle()
-
-    // Animation states
-    val logoScale by animateFloatAsState(
-        targetValue = if (isLoading) 1f else 0.8f,
-        animationSpec = tween(1000)
-    )
-
-    val dotAlpha = remember { Animatable(0f) }
-    LaunchedEffect(Unit) {
-        dotAlpha.animateTo(
-            targetValue = 1f,
-            animationSpec = infiniteRepeatable(
-                animation = tween(500),
-                repeatMode = RepeatMode.Reverse
-            )
-        )
-    }
-
-    val textSlideIn by animateFloatAsState(
-        targetValue = if (isLoading) 1f else 0f,
-        animationSpec = tween(1000)
-    )
->>>>>>> 
-
-    SideEffect {
-        systemUiController.setStatusBarColor(
-            color = BackgroundBlue,
-            darkIcons = false
-        )
-    }
-
-
-    LaunchedEffect(Unit) {
-        delay(2000)
-        navController.navigate("login") {
-            popUpTo("splash") { inclusive = true }
-
-    LaunchedEffect(key1 = true) {
-        viewModel.startSplash()
     }
 
     LaunchedEffect(isLoading) {
@@ -90,8 +52,14 @@ fun SplashScreen(
             navController.navigate(route) {
                 popUpTo("splash") { inclusive = true }
             }
-
         }
+    }
+
+    SideEffect {
+        systemUiController.setStatusBarColor(
+            color = BackgroundBlue,
+            darkIcons = false
+        )
     }
 
     Column(
@@ -103,7 +71,7 @@ fun SplashScreen(
     ) {
         Box(
             modifier = Modifier
-                .scale(logoScale)
+                .scale(if (isLoading) 1f else 0.8f)
                 .size(100.dp)
                 .background(
                     color = White,
@@ -124,7 +92,7 @@ fun SplashScreen(
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center,
-            modifier = Modifier.scale(textSlideIn)
+            modifier = Modifier.scale(if (isLoading) 1f else 0f)
         ) {
             Image(
                 painter = painterResource(id = R.drawable.ic_heart),
@@ -158,7 +126,6 @@ fun SplashScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.padding(vertical = 16.dp)
         ) {
-
             Text(
                 text = "Loading",
                 fontSize = 20.sp,
@@ -183,49 +150,5 @@ fun SplashScreen(
                 }
             }
         }
-
-
-            repeat(3) { index ->
-                Box(
-                    modifier = Modifier
-                        .size(8.dp)
-                        .background(
-                            White.copy(alpha = dotAlpha.value),
-                            CircleShape
-                        )
-                )
-            }
-        }
-
-        AnimatedVisibility(
-            visible = isLoading,
-            enter = fadeIn() + expandVertically(),
-            exit = fadeOut() + shrinkVertically()
-        ) {
-            Text(
-                text = "Loading...",
-                fontSize = 16.sp,
-                color = White,
-                modifier = Modifier.padding(top = 8.dp)
-            )
-        }
-
-        Spacer(modifier = Modifier.height(24.dp))
-
-        AnimatedVisibility(
-            visible = true,
-            enter = slideInVertically() + fadeIn(),
-            modifier = Modifier.scale(textSlideIn)
-        ) {
-            Text(
-                text = "\"Your Safety, Always Accessible ✨\"",
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Bold,
-                color = White,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.padding(horizontal = 32.dp)
-            )
-        }
     }
-}
 }

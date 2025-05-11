@@ -1,4 +1,3 @@
-
 package com.guardianapp.ui.signup
 
 import androidx.compose.foundation.background
@@ -39,8 +38,10 @@ fun SignUpScreen(navController: NavController) {
     var yearExpanded by remember { mutableStateOf(false) }
     var bloodTypeExpanded by remember { mutableStateOf(false) }
 
-    val months = listOf("January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December")
+    val months = listOf(
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    )
     val dates = (1..31).map { it.toString() }
     val years = (1950..2023).map { it.toString() }.reversed()
     val bloodTypes = listOf("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-")
@@ -95,8 +96,7 @@ fun SignUpScreen(navController: NavController) {
             shape = RoundedCornerShape(8.dp)
         )
 
-        Spacer(modifier = Modifier.height(16.dp)
-
+        Spacer(modifier = Modifier.height(16.dp))
 
         Text("Email", color = Color.Black, modifier = Modifier.padding(bottom = 8.dp))
         OutlinedTextField(
@@ -147,23 +147,22 @@ fun SignUpScreen(navController: NavController) {
             Box(modifier = Modifier.weight(1f)) {
                 ExposedDropdownMenuBox(
                     expanded = monthExpanded,
-                    onExpandedChange = { monthExpanded = !monthExpanded }
+                    onExpandedChange = { monthExpanded = it }
                 ) {
                     OutlinedTextField(
                         value = selectedMonth,
                         onValueChange = {},
                         readOnly = true,
-                        trailingIcon = { Icon(Icons.Default.KeyboardArrowDown, null) },
+                        trailingIcon = { Icon(Icons.Default.KeyboardArrowDown, "Expand") },
                         modifier = Modifier
                             .menuAnchor()
-                            .fillMaxWidth()
-                            .padding(end = 4.dp),
+                            .fillMaxWidth(),
+                        placeholder = { Text("Month") },
                         colors = TextFieldDefaults.outlinedTextFieldColors(
                             containerColor = Color.White,
                             unfocusedBorderColor = Color.Transparent
                         ),
-                        shape = RoundedCornerShape(8.dp),
-                        label = { Text("Month") }
+                        shape = RoundedCornerShape(8.dp)
                     )
                     ExposedDropdownMenu(
                         expanded = monthExpanded,
@@ -182,29 +181,28 @@ fun SignUpScreen(navController: NavController) {
                 }
             }
 
-
+            Spacer(modifier = Modifier.width(8.dp))
 
             // Date Dropdown
             Box(modifier = Modifier.weight(1f)) {
                 ExposedDropdownMenuBox(
                     expanded = dateExpanded,
-                    onExpandedChange = { dateExpanded = !dateExpanded }
+                    onExpandedChange = { dateExpanded = it }
                 ) {
                     OutlinedTextField(
                         value = selectedDate,
                         onValueChange = {},
                         readOnly = true,
-                        trailingIcon = { Icon(Icons.Default.KeyboardArrowDown, null) },
+                        trailingIcon = { Icon(Icons.Default.KeyboardArrowDown, "Expand") },
                         modifier = Modifier
                             .menuAnchor()
-                            .fillMaxWidth()
-                            .padding(horizontal = 4.dp),
+                            .fillMaxWidth(),
+                        placeholder = { Text("Date") },
                         colors = TextFieldDefaults.outlinedTextFieldColors(
                             containerColor = Color.White,
                             unfocusedBorderColor = Color.Transparent
                         ),
-                        shape = RoundedCornerShape(8.dp),
-                        label = { Text("Date") }
+                        shape = RoundedCornerShape(8.dp)
                     )
                     ExposedDropdownMenu(
                         expanded = dateExpanded,
@@ -223,27 +221,28 @@ fun SignUpScreen(navController: NavController) {
                 }
             }
 
+            Spacer(modifier = Modifier.width(8.dp))
+
             // Year Dropdown
             Box(modifier = Modifier.weight(1f)) {
                 ExposedDropdownMenuBox(
                     expanded = yearExpanded,
-                    onExpandedChange = { yearExpanded = !yearExpanded }
+                    onExpandedChange = { yearExpanded = it }
                 ) {
                     OutlinedTextField(
                         value = selectedYear,
                         onValueChange = {},
                         readOnly = true,
-                        trailingIcon = { Icon(Icons.Default.KeyboardArrowDown, null) },
+                        trailingIcon = { Icon(Icons.Default.KeyboardArrowDown, "Expand") },
                         modifier = Modifier
                             .menuAnchor()
-                            .fillMaxWidth()
-                            .padding(start = 4.dp),
+                            .fillMaxWidth(),
+                        placeholder = { Text("Year") },
                         colors = TextFieldDefaults.outlinedTextFieldColors(
                             containerColor = Color.White,
                             unfocusedBorderColor = Color.Transparent
                         ),
-                        shape = RoundedCornerShape(8.dp),
-                        label = { Text("Year") }
+                        shape = RoundedCornerShape(8.dp)
                     )
                     ExposedDropdownMenu(
                         expanded = yearExpanded,
@@ -265,26 +264,21 @@ fun SignUpScreen(navController: NavController) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-
-
-        Text("What is your blood type?", color = Color.Black)
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 8.dp)
-        ) {
+        Text("Blood Type", color = Color.Black, modifier = Modifier.padding(bottom = 8.dp))
+        Box {
             ExposedDropdownMenuBox(
                 expanded = bloodTypeExpanded,
-                onExpandedChange = { bloodTypeExpanded = !bloodTypeExpanded }
+                onExpandedChange = { bloodTypeExpanded = it }
             ) {
                 OutlinedTextField(
                     value = selectedBloodType,
                     onValueChange = {},
                     readOnly = true,
-                    trailingIcon = { Icon(Icons.Default.KeyboardArrowDown, null) },
+                    trailingIcon = { Icon(Icons.Default.KeyboardArrowDown, "Expand") },
                     modifier = Modifier
                         .menuAnchor()
                         .fillMaxWidth(),
+                    placeholder = { Text("Select Blood Type") },
                     colors = TextFieldDefaults.outlinedTextFieldColors(
                         containerColor = Color.White,
                         unfocusedBorderColor = Color.Transparent
@@ -308,23 +302,38 @@ fun SignUpScreen(navController: NavController) {
             }
         }
 
-        Spacer(modifier = Modifier.weight(1f))
+        Spacer(modifier = Modifier.height(24.dp))
 
         Button(
-            onClick = {
-                navController.navigate("home") {
-                    popUpTo("login") { inclusive = true }
-                }
-            },
+            onClick = { /* TODO: Implement signup logic */ },
             modifier = Modifier
                 .fillMaxWidth()
-                .height(50.dp),
+                .height(56.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFF2196F3)
             ),
             shape = RoundedCornerShape(8.dp)
         ) {
-            Text("Create Account", color = Color.White)
+            Text("Sign Up", fontSize = 18.sp, color = Color.White)
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Text("Already have an account? ", color = Color.Black)
+            Text(
+                "Login",
+                color = Color(0xFF2196F3),
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.clickable {
+                    navController.navigate("login") {
+                        popUpTo("signup") { inclusive = true }
+                    }
+                }
+            )
         }
     }
 }

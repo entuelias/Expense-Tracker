@@ -3,30 +3,32 @@ package com.guardianapp.ui.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.delay
 
 class HomeViewModel : ViewModel() {
     private val _userName = MutableStateFlow("")
-    val userName = _userName.asStateFlow()
+    val userName: StateFlow<String> = _userName.asStateFlow()
 
     private val _nextAppointment = MutableStateFlow<String?>(null)
-    val nextAppointment = _nextAppointment.asStateFlow()
+    val nextAppointment: StateFlow<String?> = _nextAppointment.asStateFlow()
 
     private val _bloodType = MutableStateFlow<String?>(null)
-    val bloodType = _bloodType.asStateFlow()
+    val bloodType: StateFlow<String?> = _bloodType.asStateFlow()
 
     private val _notifications = MutableStateFlow<List<String>>(emptyList())
-    val notifications = _notifications.asStateFlow()
+    val notifications: StateFlow<List<String>> = _notifications.asStateFlow()
 
     private val _upcomingAppointments = MutableStateFlow<List<String>>(emptyList())
-    val upcomingAppointments = _upcomingAppointments.asStateFlow()
+    val upcomingAppointments: StateFlow<List<String>> = _upcomingAppointments.asStateFlow()
 
     private val _isLoading = MutableStateFlow(false)
-    val isLoading = _isLoading.asStateFlow()
+    val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
 
     private val _error = MutableStateFlow<String?>(null)
-    val error = _error.asStateFlow()
+    val error: StateFlow<String?> = _error.asStateFlow()
 
     init {
         loadUserData()
@@ -36,8 +38,10 @@ class HomeViewModel : ViewModel() {
         viewModelScope.launch {
             _isLoading.value = true
             try {
-                // TODO: Implement actual API calls when backend is ready
-                // For now, use mock data
+                // Simulate network delay
+                delay(1000)
+
+                // Mock data
                 _userName.value = "Entisar"
                 _nextAppointment.value = "Tomorrow at 10 AM"
                 _bloodType.value = "O+"
@@ -67,10 +71,10 @@ class HomeViewModel : ViewModel() {
         _error.value = null
     }
 
-    fun dismissNotification(index: Int) {
+    fun dismissNotification(notificationIndex: Int) {
         val currentNotifications = _notifications.value.toMutableList()
-        if (index in currentNotifications.indices) {
-            currentNotifications.removeAt(index)
+        if (notificationIndex in currentNotifications.indices) {
+            currentNotifications.removeAt(notificationIndex)
             _notifications.value = currentNotifications
         }
     }
